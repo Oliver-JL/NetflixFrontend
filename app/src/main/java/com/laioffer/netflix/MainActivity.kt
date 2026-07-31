@@ -13,6 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.laioffer.netflix.ui.theme.NetflixTheme
+import android.content.Intent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 
 private const val TAG = "MainActivity"
 
@@ -24,9 +31,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             NetflixTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    MainScreen(
+                        onOpenPractice = {
+                            startActivity(Intent(this, ComposePracticeActivity::class.java))
+                        }
                     )
                 }
             }
@@ -58,6 +66,29 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "onDestroy")
     }
 }
+
+@Composable
+fun MainScreen(onOpenPractice: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "Netflix Template App",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(text = "Activity: MainActivity")
+
+        Button(onClick = onOpenPractice) {
+            Text(text = "Open Compose Practice")
+        }
+    }
+}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
