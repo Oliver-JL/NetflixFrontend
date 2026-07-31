@@ -17,6 +17,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.ui.Alignment
 
 class ComposePracticeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +59,68 @@ fun ComposePracticeScreen() {
         )
 
         Text(text = "Activity: ComposePracticeActivity")
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
+                .background(
+                    color = MaterialTheme.colorScheme.primary,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .padding(24.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Selected profile: Guest",
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = "Background layer",
+                modifier = Modifier.align(Alignment.BottomStart),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.labelSmall
+            )
+
+            Text(
+                text = "Top layer",
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .background(
+                        color = MaterialTheme.colorScheme.background,
+                        shape = RoundedCornerShape(50)
+                    )
+                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(onClick = { }) {
+                Text(text = "Choose Guest")
+            }
+
+            Button(onClick = { }) {
+                Text(text = "Choose Kids")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(text = "Rows place items horizontally.")
+        Text(text = "Columns place items vertically.")
+        Text(text = "Boxes can stack content in one area.")
+
+
     }
+
+
 }
 
 @Preview(showBackground = true)
