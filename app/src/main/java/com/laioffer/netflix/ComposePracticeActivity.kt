@@ -25,6 +25,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 
 class ComposePracticeActivity : ComponentActivity() {
@@ -46,6 +50,8 @@ class ComposePracticeActivity : ComponentActivity() {
 
 @Composable
 fun ComposePracticeScreen() {
+    var selectedProfile by remember { mutableStateOf("Guest") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +78,7 @@ fun ComposePracticeScreen() {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Selected profile: Guest",
+                text = "Selected profile: $selectedProfile",
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontWeight = FontWeight.Bold
             )
@@ -102,11 +108,11 @@ fun ComposePracticeScreen() {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(onClick = { }) {
+            Button(onClick = { selectedProfile = "Guest" }) {
                 Text(text = "Choose Guest")
             }
 
-            Button(onClick = { }) {
+            Button(onClick = { selectedProfile = "Kids" }) {
                 Text(text = "Choose Kids")
             }
         }
