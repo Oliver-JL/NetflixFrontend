@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
 
     // Navigation
+    implementation(libs.androidx.navigation.compose)
 
     // ViewModel
 
