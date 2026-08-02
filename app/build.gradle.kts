@@ -53,8 +53,10 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Hilt
     implementation(libs.hilt.android)
