@@ -57,6 +57,9 @@ dependencies {
     // Hilt
 
     // Retrofit & Networking
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp)
 
     // Coil for images
 

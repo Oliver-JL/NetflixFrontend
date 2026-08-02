@@ -21,19 +21,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.laioffer.netflix.navigation.NetflixNavHost
 import com.laioffer.netflix.navigation.Screen
+import com.laioffer.netflix.network.NetworkModuleNoDi
 import com.laioffer.netflix.ui.components.BottomNavigationBar
 import com.laioffer.netflix.ui.theme.NetflixTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val TAG = "MainActivity"
+private const val NETWORK_TAG = "Network"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
         enableEdgeToEdge()
+        logHomeResponse()
         setContent {
             NetflixTheme {
                 Surface(
@@ -78,6 +85,25 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    }
+
+    // Calls the backend once so Logcat proves Retrofit is connected.
+    private fun logHomeResponse() {
+        lifecycleScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    NetworkModuleNoDi.api.getHome().execute()
+                }
+
+                if (response.isSuccessful) {
+                    Log.d(NETWORK_TAG, "Home response: ${response.body()}")
+                } else {
+                    Log.e(NETWORK_TAG, "Home request failed: ${response.code()}")
+                }
+            } catch (t: Throwable) {
+                Log.e(NETWORK_TAG, "Home request error", t)
+            }
+        }
     }
 
     override fun onStart() {
