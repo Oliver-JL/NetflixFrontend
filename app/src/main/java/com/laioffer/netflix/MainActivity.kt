@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
         logHomeResponse()
-        testFavoriteDatabaseSetup()
+        // testFavoriteDatabaseSetup()
         enableEdgeToEdge()
         setContent {
             NetflixTheme {
