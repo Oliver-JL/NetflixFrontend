@@ -17,4 +17,7 @@ interface FavoriteDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM favorites WHERE id = :videoId)")
     fun isFavorite(videoId: String): Flow<Boolean>
+
+    @Query("SELECT * FROM favorites")
+    fun getAll(): Flow<List<VideoEntity>>
 }
