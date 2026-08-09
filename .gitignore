@@ -1,5 +1,22 @@
-# Project exclude paths
+# Build and IDE files
 /.gradle/
+/build/
 .idea/
+*.iml
 .kotlin/
+
+# Local configuration and signing files
 /local.properties
+*.jks
+*.keystore
+
+# Local AI tools
+.claude/
+.junie/
+.codex/
+.agents/
+
+# OS and log files
+.DS_Store
+Thumbs.db
+*.log
